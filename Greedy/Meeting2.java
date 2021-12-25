@@ -40,6 +40,52 @@ public int minMeetingRooms(List<Interval> intervals) {
     
  Approach 2-> Using Sorting and 2 pointer
  
+ public int minMeetingRooms(List<Interval> intervals) {
+        // Write your code here
+        //Sorting the interval list based on meeting start time.
+        
+        ArrayList<Integer> startarr=new ArrayList<Integer>();
+        ArrayList<Integer> endarr=new ArrayList<Integer>();
+
+        for(int i=0;i<intervals.size();i++)
+        {
+            startarr.add(intervals.get(i).start);
+            endarr.add(intervals.get(i).end);
+        }
+
+        Collections.sort(startarr);
+        Collections.sort(endarr);
+
+        int currroom=0;
+        int maxroom=0;
+        int startidx=0,endidx=0;
+        while(startidx<startarr.size())
+        {
+            if(startarr.get(startidx)<endarr.get(endidx))
+            {
+                currroom++;
+                startidx++;
+            }
+            else if(startarr.get(startidx)>endarr.get(endidx))
+            {
+                currroom--;
+                endidx++;
+            }
+            else
+            {
+                startidx++;
+                endidx++;
+            }
+
+            if(currroom>maxroom)
+            {
+                maxroom=currroom;
+            }
+        }
+        return maxroom;
+
+    }
+ 
  
  
  
