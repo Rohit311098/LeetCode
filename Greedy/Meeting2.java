@@ -40,3 +40,6 @@ public int minMeetingRooms(List<Interval> intervals) {
     
  Approach 2-> Using Sorting and 2 pointer
  
+ 
+ 
+ 
