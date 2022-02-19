@@ -60,3 +60,40 @@ class Solution {
 
 
 2. Using DFS
+
+class Solution {
+    
+    public void helper(TreeNode root,List<Integer> rightview,int level)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        
+        if(rightview.size()>level)
+        {
+            rightview.set(level,root.val);
+        }
+        else
+        {
+            rightview.add(root.val);
+        }
+        
+        helper(root.left,rightview,level+1);
+        helper(root.right,rightview,level+1);
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        
+        if(root==null)
+        {
+            return new ArrayList<>();
+        }
+        
+        List<Integer> rightview=new ArrayList<>();
+        
+        helper(root,rightview,0);
+        
+        return rightview;
+        
+    }
+}
