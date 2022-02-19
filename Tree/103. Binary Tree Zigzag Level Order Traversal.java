@@ -29,9 +29,10 @@ class Solution {
         
         stk1.push(root);
         
-        List<Integer> currlevel=new ArrayList<>();
-        while(stk1.size()==0 && stk2.size()==0)
+       
+        while(stk1.size()>0 || stk2.size()>0)
         {
+             List<Integer> currlevel=new ArrayList<>();
             if(level%2==1)
             {
                 //odd level mai first stack se second stack mai daalege
@@ -69,8 +70,9 @@ class Solution {
                     }
                 } 
             }
+            
+            System.out.println(currlevel);
             result.add(currlevel);
-            currlevel=new ArrayList<>();
             level++;
         }
         
