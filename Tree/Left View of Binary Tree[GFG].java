@@ -49,5 +49,39 @@ class Tree
 
 2. Using DFS Approach
 
+class Tree
+{
+    
+    public void helper(Node root,ArrayList<Integer> leftview,int level)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        
+        if(level>=leftview.size())
+        {
+            leftview.add(root.data);
+        }
+        
+        helper(root.left,leftview,level+1);
+        helper(root.right,leftview,level+1);
+    }
+    ArrayList<Integer> leftView(Node root)
+    {
+        if(root==null)
+        {
+            return new ArrayList<>();
+        }
+        
+        ArrayList<Integer> leftview=new ArrayList<>();
+        
+        helper(root,leftview,0);
+        
+        return leftview;
+       
+      
+    }
+}
 
   
