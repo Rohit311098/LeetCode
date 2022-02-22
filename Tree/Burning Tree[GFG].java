@@ -11,7 +11,7 @@ class Solution
     		right = null;
     	}
     }*/
-    static int maxtime=0;
+    static int time=0;
      public  static int dfs(Node root,int target)
     {
         if(root==null)
@@ -20,44 +20,41 @@ class Solution
         }
         if(root.data==target)
         {
-            kleveldown(root,null,0);
+            //-1 esliye return kiya hai because height in terms of nodes hai but haime in terms of edges chahiye from current node
+            time=Math.max(time,height(root,null)-1);
             return 1;
         }
         
         int left=dfs(root.left,target);
         if(left>0)
         {
-            kleveldown(root,root.left,left);
+            //-1 esliye return kiya hai because height in terms of nodes hai but haime in terms of edges chahiye from current node
+            time=Math.max(time,left+height(root,root.left)-1);
             return 1+left;
         }
         
         int right=dfs(root.right,target);
         if(right>0)
         {
-            kleveldown(root,root.right,right);
+            //-1 esliye return kiya hai because height in terms of nodes hai but haime in terms of edges chahiye from current node
+            time=Math.max(time,right+height(root,root.right)-1);
             return 1+right;
         }
         return -1;
     }
-    public static void kleveldown(Node root,Node blocker,int k)
+    public static int height(Node root,Node blocker)
      {
          if(root==null || root==blocker)
          {
-             return ;
+             return 0;
          }
-         
-         if(k>maxtime)
-         {
-             maxtime=k;
-         }
-         kleveldown(root.left,blocker,k+1);
-         kleveldown(root.right,blocker,k+1);
+         return 1+Math.max(height(root.left,blocker),height(root.right,blocker));
      }
     public static int minTime(Node root, int target) 
     {
-       maxtime=0;
+       time=0;
        
        dfs(root,target);
-       return maxtime;
+       return time;
     }
 }
