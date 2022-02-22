@@ -41,7 +41,7 @@ class Solution {
     }
     public void kleveldown(TreeNode root,TreeNode blocker,int k,List<Integer> result)
      {
-         if(root==null || root==blocker)
+         if(k<0 || root==null || root==blocker)
          {
              return ;
          }
@@ -127,7 +127,7 @@ class Solution {
     }
     public void kleveldown(TreeNode root,TreeNode blocker,int k,List<Integer> result)
      {
-         if(root==null || root==blocker)
+         if(k<0 || root==null || root==blocker)
          {
              return ;
          }
