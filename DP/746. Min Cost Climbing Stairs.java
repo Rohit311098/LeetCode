@@ -90,7 +90,6 @@ class Solution {
             dp[i]=cost[i]+Math.min(dp[i-1],dp[i-2]);
             }
         }
-        
         return dp[n];
     }
   
