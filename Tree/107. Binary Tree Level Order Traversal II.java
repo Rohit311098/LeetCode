@@ -1,4 +1,4 @@
-//BFS Approach
+ BFS Approach
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -54,5 +54,55 @@ class Solution {
         Collections.reverse(result);
         return result;
         
+    }
+}
+
+
+2. DFS  Approach
+class Solution {
+    TreeMap<Integer,ArrayList<Integer>> hm;
+    
+    public void DFS(TreeNode root,int row)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        
+        if(hm.containsKey(row)==false)
+        {
+            hm.put(row,new ArrayList<>());
+        }
+        
+        hm.get(row).add(root.val);
+        
+        DFS(root.left,row+1);
+        DFS(root.right,row+1);
+    }
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        
+        List<List<Integer>> result=new ArrayList<>();
+        hm=new TreeMap<>();
+        
+        // 0 is the current row
+        DFS(root,0);
+        
+        List<Integer> oned=new ArrayList<>();
+        for(Integer i:hm.keySet())
+        {
+            ArrayList<Integer> currrow=hm.get(i);
+            
+            for(Integer j:currrow)
+            {
+                oned.add(j);
+            }
+            
+            result.add(oned);
+            oned=new ArrayList<>();
+        }
+        
+        Collections.reverse(result);
+        
+        return result;
     }
 }
