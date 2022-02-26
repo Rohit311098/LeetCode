@@ -1,18 +1,54 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
+1. BFS Approach
+class Solution {
+    public int maxLevelSum(TreeNode root) {
+        if(root==null)
+        {
+            return 0;
+        }
+        
+        Queue<TreeNode> q=new ArrayDeque<>();
+        q.add(root);
+        int maxval=Integer.MIN_VALUE;
+        int maxlevel=1;
+        int currlevel=1;
+        
+        
+        while(q.size()>0)
+        {
+            int currlevelsum=0;
+            int size=q.size();
+            
+            for(int i=0;i<size;i++)
+            {
+                TreeNode curr=q.remove();
+                
+                currlevelsum+=curr.val;
+                
+                if(curr.left!=null)
+                {
+                    q.add(curr.left);
+                }
+                
+                if(curr.right!=null)
+                {
+                    q.add(curr.right);
+                }
+            }
+            
+            if(currlevelsum>maxval)
+            {
+                maxval=currlevelsum;
+                maxlevel=currlevel;
+            }
+            
+            currlevel++;
+        }
+        
+        return maxlevel;
+    }
+}
+
+2. DFS Approach
 class Solution {
     
     public void DFS(TreeNode root,int level,ArrayList<Integer> arr)
