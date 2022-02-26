@@ -1,3 +1,4 @@
+1. Using 2 stack approach
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -78,6 +79,57 @@ class Solution {
         
         return result;
         
+        
+    }
+}
+
+
+2. Using a Variable Approach
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        if(root==null)
+        {
+            return new ArrayList<>();
+        }
+        
+        int level=0;
+        List<List<Integer>> result=new ArrayList<>();
+        
+        List<Integer> oned=new ArrayList<>();
+        
+        Queue<TreeNode> q=new ArrayDeque<>();
+        q.add(root);
+        
+        while(q.size()>0)
+        {
+            int size=q.size();
+            for(int i=0;i<size;i++)
+            {
+                TreeNode ele=q.remove();
+                oned.add(ele.val);
+                
+                if(ele.left!=null)
+                {
+                    q.add(ele.left);
+                }
+                
+                
+                if(ele.right!=null)
+                {
+                    q.add(ele.right);
+                }
+            }
+            
+            if(level%2==1)
+            {
+               Collections.reverse(oned); 
+            }
+            result.add(oned);
+            oned=new ArrayList<>();
+            level++;
+        }
+        
+        return result;
         
     }
 }
