@@ -1,4 +1,4 @@
-TC-O(N) SC-O(N)
+TC-O(N2)->Because for each node we are calculating string for each node SC-O(N)
 class Solution {
     
     HashMap<String,Integer> h;
