@@ -40,3 +40,48 @@
         helper2(root.right,currsum,target);
     }
 }
+
+
+
+2. Approach 2 Optimised
+Using HashMap and Prefix sum wala technique TC-O(N) SC-O(N) because of HashMap
+class Solution {
+    HashMap<Integer,Integer> freq;
+    
+    public int getcount(TreeNode root,int target,int prefixsum)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        
+        prefixsum+=root.val;
+        
+        int count=freq.getOrDefault(prefixsum-target,0);
+        
+        freq.put(prefixsum,freq.getOrDefault(prefixsum,0)+1);
+        
+        count+=getcount(root.left,target,prefixsum);
+        count+=getcount(root.right,target,prefixsum);
+        
+        //Backtracking and decreasing value of prefixsum
+        freq.put(prefixsum,freq.getOrDefault(prefixsum,0)-1);
+        
+        return count;
+    }
+    public int pathSum(TreeNode root, int targetSum) {
+        
+        if(root==null)
+        {
+            return 0;
+        }
+        
+        freq=new HashMap<>();
+        
+        freq.put(0,1);
+        
+        return getcount(root,targetSum,0);
+    }
+}
+ 
+ 
