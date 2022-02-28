@@ -9,7 +9,6 @@ class Solution {
         
         int idx=0;
         return helper(nums,idx);
-        
     }
     
     public int helper(int[] nums,int idx)
