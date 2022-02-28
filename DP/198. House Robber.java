@@ -81,7 +81,6 @@ class Solution {
             
             dp[i]=Math.max(taken,notaken);
         }
-        
         return dp[nums.length-1];
     }
     
