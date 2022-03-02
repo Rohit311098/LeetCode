@@ -14,49 +14,43 @@
  * }
  */
 class Solution {
+    HashMap<Integer,Integer> hm;
     
-    public int find(int val,int[] postorder)
-    {
-        for(int i=0;i<postorder.length;i++)
-        {
-            if(postorder[i]==val)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-    public TreeNode helper(int[] preorder,int[] postorder,int prel,int prer,int postl,int postr)
+    public TreeNode construct(int[] preorder,HashMap<Integer,Integer> hm,int prel,int prer,int postl,int postr)
     {
         if(prel>prer)
         {
             return null;
         }
         
-        //If only 1 node possible means leaf node
+        TreeNode root=new TreeNode(preorder[prel]);
         if(prel==prer)
         {
-            return new TreeNode(preorder[prel]);
+            return root;
         }
         
-        TreeNode root=new TreeNode(preorder[prel]);
         
-        //Agar hum last node per hai preorder k toh aage kuch nhi hoga 
-        if(prel+1>=preorder.length) return root;
+        if(prel+1==preorder.length)
+        {
+            return root;
+        }
         
+        int postidx=hm.get(preorder[prel+1]);
         
-        int leftchild=preorder[prel+1];
-        
-        int postidx=find(leftchild,postorder);
-        
-        int noofnode=postidx-postl+1;
-        root.left=helper(preorder,postorder,prel+1,prel+noofnode,postl,postidx);
-        
-        root.right=helper(preorder,postorder,prel+noofnode+1,prer,postidx+1,prer);
+        int noofele=postidx-postl+1;
+        root.left=construct(preorder,hm,prel+1,prel+noofele,postl,postidx);
+        root.right=construct(preorder,hm,prel+noofele+1,prer,postidx+1,postr);
         
         return root;
     }
     public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
-        return helper(preorder,postorder,0,preorder.length-1,0,postorder.length-1);
+        hm=new HashMap<>();
+        
+        for(int i=0;i<postorder.length;i++)
+        {
+            hm.put(postorder[i],i);
+        }
+        
+        return construct(preorder,hm,0,preorder.length-1,0,postorder.length-1);
     }
 }
