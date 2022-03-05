@@ -1,4 +1,4 @@
-// Using Extra Space and TC-O(N)
+1. Recursive Approach-> TC-O(N)  SC-(H) Recusion space
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         
@@ -28,6 +28,68 @@ class Solution {
     }
 }
 
+2. Iterative Method-> TC-O(N)  SC-O(H) (Khud ka stack)
+    class Solution {
+    public class Pair
+    {
+        TreeNode node;
+        char state;
+        
+        Pair(TreeNode node)
+        {
+            this.node=node;
+            this.state='l';
+        }
+    }
+    public List<Integer> inorderTraversal(TreeNode root) {
+        
+         if(root==null)
+        {
+            return new ArrayList<>();
+        }
+        
+        ArrayList<Integer> result=new ArrayList<>();
+         Stack<Pair> stk=new Stack<>();
+        stk.push(new Pair(root));
+        
+        while(stk.size()!=0)
+        {
+            if(stk.peek().state=='l')
+            {
+                if(stk.peek().node.left!=null)
+                {
+                    Pair p=stk.pop();
+                    p.state='i';
+                    stk.push(p);
+                    stk.push(new Pair(p.node.left));
+                }
+                else
+                {
+                    Pair p=stk.pop();
+                    p.state='i';
+                    stk.push(p);
+                }
+                
+            }
+            else if(stk.peek().state=='i')
+            {
+                result.add(stk.peek().node.val);
+                stk.peek().state='r';
+            }
+            else
+            {
+                Pair top=stk.pop();
+                if(top.node.right!=null)
+                {
+                    stk.push(new Pair(top.node.right));
+                }
+            }
+        }
+        
+        return result;
+        
+    }
+}
 
 2. Morris Traversal-> TC-O(N)   SC-O(1)
 
