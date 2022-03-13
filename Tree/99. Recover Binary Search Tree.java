@@ -45,10 +45,19 @@ class Solution {
     }
 }
 
-2. Using Morris Traversal 
+2. Using Morris Traversal - TC-O(N)   SC-O(1)
 
 class Solution {
     
+    public TreeNode getrightmost(TreeNode node,TreeNode root)
+    {
+        while(node.right!=null && node.right!=root)
+        {
+            node=node.right;
+        }
+        
+        return node;
+    }
     public void recoverTree(TreeNode root) {
          TreeNode first=null;
         TreeNode second=null;
@@ -57,12 +66,7 @@ class Solution {
         {
             if(root.left!=null)
             {
-                TreeNode rootkleftkaright=root.left;
-                while(rootkleftkaright.right!=null && rootkleftkaright.right!=root)
-                {
-                    rootkleftkaright=rootkleftkaright.right;
-                }
-                
+                TreeNode rootkleftkaright=getrightmost(root.left,root);
                 if(rootkleftkaright.right==root)
                 {
                     rootkleftkaright.right=null;
