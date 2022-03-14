@@ -11,7 +11,7 @@
         flatten(root.left);
         flatten(root.right);
         
-        while(root.left!=null)
+        if(root.left!=null)
         {
             //Root k right ko store kar lo
             TreeNode rootkaright=root.right;
@@ -32,8 +32,88 @@
 }
 
 
+2.
+  
+  
 
-2. Using Explicit Stack
+2. Using Khud ki stack   TC-O(N)   SC-O(N) 
+  
+class Solution {
+    
+    public class Pair
+    {
+        TreeNode node;
+        char state;
+        
+        Pair(TreeNode node)
+        {
+            this.node=node;
+            state='l';
+        }
+    }
+    public void flatten(TreeNode root) {
+        
+        if(root==null)
+        {
+            return;
+        }
+        
+        Stack<Pair> stk=new Stack<>();
+        
+        stk.push(new Pair(root));
+        
+        while(stk.size()!=0)
+        {
+            Pair top=stk.peek();
+            
+            if(top.state=='l')
+            {
+                if(top.node.left!=null)
+                {
+                    top.state='i';
+                    stk.push(new Pair(top.node.left));
+                }
+                else
+                {
+                    top.state='i';
+                }
+            }
+            else if(top.state=='i')
+            {
+                 if(top.node.right!=null)
+                {
+                    top.state='r';
+                    stk.push(new Pair(top.node.right));
+                }
+                else
+                {
+                    top.state='r';
+                }
+            }
+            else if(top.state=='r')
+            {
+                if(top.node.left!=null)
+                {
+                    //Top k right ko store kar lo
+                    TreeNode rootkaright=top.node.right;
+                    
+                    //Top k right ko root ka left bana do
+                    top.node.right=top.node.left;
+                    
+                    top.node.left=null;
+                    //wahi root ka left wala traverse karte raho vo jo abhi root ka right ban chuka hai
+                    while(top.node.right!=null)
+                    {
+                        top.node=top.node.right;
+                    }
+                    top.node.right=rootkaright;
+                }
+                stk.pop();
+            }
+        }
+        
+    }
+}
 
 
 
