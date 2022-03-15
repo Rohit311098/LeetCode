@@ -98,6 +98,11 @@ class Solution {
             return root;
         }
         
-        return left==null? right:left;
+         if(left!=null)
+        {
+            return left;
+        }
+        
+        return right;
     }
 }
