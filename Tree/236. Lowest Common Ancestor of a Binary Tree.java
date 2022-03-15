@@ -1,4 +1,8 @@
+p and q node always exist in this tree if that is given then below 2 approaches work if p and q may or may not present then 3 approach work
+
 1. Brute Force Approach-> Using Root to node path
+  TC-O(N)    SC-O(N)
+    
 class Solution {
     public ArrayList<TreeNode> getpath(TreeNode root,TreeNode p)
     {
@@ -68,16 +72,9 @@ class Solution {
 
 
 
-
-
-
-
-
-
-
-
-
 2. Optimised Approach -> Returing node approach
+  TC-O(N)    SC-O(1)
+    
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
@@ -106,3 +103,7 @@ class Solution {
         return right;
     }
 }
+
+
+3. If p and q node may or may not present
+
