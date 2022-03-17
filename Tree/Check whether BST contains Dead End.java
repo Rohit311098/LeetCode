@@ -2,37 +2,21 @@ class GFG
 {
     static boolean end;
     
-    public static void helper(Node root,int left,int right)
+    public static boolean helper(Node root,int left,int right)
     {
         if(root==null)
         {
-            return;
+            return false;
         }
         
         if(left==right)
         {
-            end=true;
-            return;
+           return true;
         }
-        
-        helper(root.left,left,root.data-1);
-        
-        if(end==true)
-        {
-            return;
-        }
-        
-        helper(root.right,root.data+1,right);
-        
-        if(end==true)
-        {
-            return;
-        }
+        return helper(root.left,left,root.data-1) || helper(root.right,root.data+1,right);
     }
     public static boolean isDeadEnd(Node root)
     {
-        end=false;
-        helper(root,1,Integer.MAX_VALUE);
-        return end;
+        return helper(root,1,Integer.MAX_VALUE);
     }
 }
