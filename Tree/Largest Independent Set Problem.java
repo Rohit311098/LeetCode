@@ -1,3 +1,7 @@
+// TC-O(N2)   SC-O(1)
+
+// If we have constructions rights then we can store LISS of each node and we don't need to calculate LISS of child and grandchild again and again
+
 class Solution {
     public int LISS(Node node){
         if(node==null)
