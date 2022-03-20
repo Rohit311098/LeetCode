@@ -1,4 +1,15 @@
 class Solution {
+    
+     public TreeNode balanceBST(TreeNode root) {
+        
+        ArrayList<Integer> arr=new ArrayList<>();
+        
+        getinorder(root,arr);
+        
+        System.out.println(arr);
+        return balanceBSTHelper(arr,0,arr.size()-1);
+        
+    }
     public void getinorder(TreeNode root,ArrayList<Integer> arr)
     {
         if(root==null)
@@ -25,14 +36,5 @@ class Solution {
         root.right=balanceBSTHelper(arr,mid+1,right);
         return root;
     }
-    public TreeNode balanceBST(TreeNode root) {
-        
-        ArrayList<Integer> arr=new ArrayList<>();
-        
-        getinorder(root,arr);
-        
-        System.out.println(arr);
-        return balanceBSTHelper(arr,0,arr.size()-1);
-        
-    }
+   
 }
