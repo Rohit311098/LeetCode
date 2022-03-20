@@ -8,6 +8,11 @@ class Solution {
         }
         
         boolean left =isValidBST(root.left);
+        
+        if(left==false)
+        {
+            return false;
+        }
         if(prev==null)
         {
             prev=root;
@@ -18,8 +23,6 @@ class Solution {
         }
         
         prev=root;
-        boolean right=isValidBST(root.right);
-        
-        return left && right;
+        return isValidBST(root.right);
     }
 }
