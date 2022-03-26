@@ -1,28 +1,16 @@
 class Solution {
     
-    int prevsum;
+    int prevsum=0;
     public TreeNode bstToGst(TreeNode root) {
         
         if(root==null)
         {
             return null;
         }
-        
-        prevsum=0;
-        return reverseinorder(root);
-    }
-    public TreeNode reverseinorder(TreeNode root)
-    {
-        if(root==null)
-        {
-            return null;
-        }
-        
-        root.right=reverseinorder(root.right);
+        bstToGst(root.right);
         root.val+=prevsum;
         prevsum=root.val;
-        root.left=reverseinorder(root.left);
-        
+        bstToGst(root.left);
         return root;
     }
 
