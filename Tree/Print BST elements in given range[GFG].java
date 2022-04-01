@@ -9,12 +9,17 @@ class Solution
         {
             return;
         }
-        helper(root.left,low,high,result);
+	    
+	 if(root.data>=low)   
+          	helper(root.left,low,high,result);
+	    
         if(root.data>=low && root.data<=high)
         {
             result.add(root.data);
         }
-        helper(root.right,low,high,result);
+	
+	if(root.data<=high)
+        	helper(root.right,low,high,result);
     }
 	public static ArrayList<Integer> printNearNodes(Node root,int low,int high) {
         // code here.
